@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8ecf0060-b5af-486d-8ee2-9bdb774eb9b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{82bc65b7-b690-4221-8c7d-7a9307dd02f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cuda Source Files">
+      <UniqueIdentifier>{ec3a6012-6555-4159-98c5-9ac793edfcf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cuda Header Files">
+      <UniqueIdentifier>{c2df68c9-f2c8-44c1-9141-3684ec53beb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Resources">
+      <UniqueIdentifier>{28196a58-4435-478a-b411-921b299cc5e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Resources\Zluda">
+      <UniqueIdentifier>{8429e9fc-d911-4896-8d47-54a1c31393db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="windows_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vector_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zluda_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="main.cu">
+      <Filter>Cuda Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="common.cu">
+      <Filter>Cuda Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="lab2_task1.cu">
+      <Filter>Cuda Source Files</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vector_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="windows_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zluda_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.cuh">
+      <Filter>Cuda Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="labs_tasks.cuh">
+      <Filter>Cuda Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
