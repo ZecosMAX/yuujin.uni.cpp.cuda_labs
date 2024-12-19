@@ -12,18 +12,17 @@ __device__ int forward[32] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 __global__ void kernel_no_coalece(float* a, float* b, float* result, int N)
 {
     //assume block size 32
-    int idx = blockIdx.x * blockDim.x + reverse[threadIdx.x];
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    result[idx] = a[idx] * b[idx];
+    result[(idx + 1) % N] = a[(idx + 1) % N] * b[(idx + 1) % N];
 }
 
 __global__ void kernel_coalece(float* a, float* b, float* result, int N)
 {
     //assume block size 32
-    int idx = blockIdx.x * blockDim.x + forward[threadIdx.x];
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    result[idx] = a[idx] * b[idx];
-
+    result[idx % N] = a[idx % N] * b[idx % N];
 }
 
 void result_cpu(float* a, float* b, float* result, int size)
@@ -36,7 +35,7 @@ void result_cpu(float* a, float* b, float* result, int size)
 
 void Lab2_Task1()
 {
-    int N = 32 * 1024 * 1024;
+    int N = 128 * 1024 * 1024;
 
     float memAllocTime = 0.0f;
     float memFillTime = 0.0f;
@@ -108,19 +107,19 @@ void Lab2_Task1()
     // warmup kernel, see: https://stackoverflow.com/questions/57709333/cuda-kernel-runs-faster-the-second-time-it-is-run-why
     TimeEventGPU([&]()
     {
-        kernel_coalece<<<dim3((N / blockSize)), dim3(blockSize)>>>(gpuVecA2, gpuVecB2, gpuVecResult2);
+        kernel_coalece<<<dim3((N / blockSize)), dim3(blockSize)>>>(gpuVecA2, gpuVecB2, gpuVecResult2, N);
     });
 
     gpuExecTime1 += (float)TimeEventGPU([&]()
         {
             // Запускаем и ждём выполнения кернела
-            kernel_no_coalece <<<dim3(N / blockSize), dim3(blockSize)>>> (gpuVecA1, gpuVecB1, gpuVecResult1);
+            kernel_no_coalece <<<dim3(N / blockSize), dim3(blockSize)>>> (gpuVecA1, gpuVecB1, gpuVecResult1, N);
         });
 
     gpuExecTime2 += (float)TimeEventGPU([&]()
         {
             // Запускаем и ждём выполнения кернела
-            kernel_coalece << <dim3((N / blockSize)), dim3(blockSize) >> > (gpuVecA2, gpuVecB2, gpuVecResult2);
+            kernel_coalece << <dim3((N / blockSize)), dim3(blockSize) >> > (gpuVecA2, gpuVecB2, gpuVecResult2, N);
         });
 
     
