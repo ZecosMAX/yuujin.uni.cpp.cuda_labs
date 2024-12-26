@@ -1,6 +1,7 @@
-#include "vector_utils.hpp"
+﻿#include "vector_utils.hpp"
 
 #include <iostream>
+#include <vector>
 
 void fillRandomNaturalVector(float* vector, int size)
 {
@@ -55,4 +56,60 @@ void print_vector(float* vec, int size, int offset)
             printf(", ");
     }
     printf(" }\n");
+}
+
+void graph_vector(float* ys, int size, int cliHeight)
+{
+    if (cliHeight < 4)
+        cliHeight = 4;
+
+    float minY = +INFINITY;
+    float maxY = -INFINITY;
+
+    for (size_t i = 0; i < size; i++)
+    {
+        float item = ys[i];
+
+        if (item < minY)
+            minY = item;
+
+        if (item > maxY)
+            maxY = item;
+    }
+
+    float step = (maxY - minY) / (cliHeight - 2);
+
+    for (int y = (cliHeight - 1); y >= 0; y--)
+    {
+        if (y == 0)
+        {
+            std::cout << '+';
+            for (int x = 0; x < size; x++)
+            {
+                std::cout << '-';
+            }
+            std::cout << std::endl;
+        }
+        else
+        {
+            std::cout << '|';
+
+            for (int x = 0; x < size; x++)
+            {
+                float item = ys[x];
+
+                if (item > ((float)(y - 1)) * step)
+                {
+                    std::wcout << L'X';
+                }
+                else
+                {
+                    std::wcout << L' ';
+                }
+            }
+
+            std::wcout << std::endl;
+
+        }
+    }
 }

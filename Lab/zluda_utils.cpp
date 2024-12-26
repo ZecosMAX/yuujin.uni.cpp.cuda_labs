@@ -33,7 +33,7 @@ void RunWithZluda(int argc, char* argv[])
 	wcout << L"args: " << cmdLineArgs << endl;
 
 	StartApplication(
-		(directory + L"\\zluda\\zluda.exe").data(),
-		cmdLineArgs.data()
+		(LPWSTR)(const wchar_t*)((directory + L"\\zluda\\zluda.exe").data()),
+		(LPWSTR)(const wchar_t*)(cmdLineArgs.data())
 	);
 }

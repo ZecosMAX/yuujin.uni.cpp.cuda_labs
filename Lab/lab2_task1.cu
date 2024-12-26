@@ -7,14 +7,24 @@
 using namespace std::chrono;
 
 __device__ int reverse[32] = { 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-__device__ int forward[32] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
+__device__ int forward[32] = { 0, 1, 2, 3, 4, 5, 6, 8, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
 
 __global__ void kernel_no_coalece(float* a, float* b, float* result, int N)
 {
     //assume block size 32
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    result[(idx + 1) % N] = a[(idx + 1) % N] * b[(idx + 1) % N];
+    if (idx == 5)
+    {
+        idx = 6;
+    }
+    else if (idx == 6)
+    {
+        idx = 5;
+    }
+
+    result[idx] = a[idx] * b[idx];
+    //result[(idx + 1) % N] = a[(idx + 1) % N] * b[(idx + 1) % N];
 }
 
 __global__ void kernel_coalece(float* a, float* b, float* result, int N)
@@ -22,7 +32,7 @@ __global__ void kernel_coalece(float* a, float* b, float* result, int N)
     //assume block size 32
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    result[idx % N] = a[idx % N] * b[idx % N];
+    result[idx] = a[idx] * b[idx];
 }
 
 void result_cpu(float* a, float* b, float* result, int size)
@@ -35,7 +45,7 @@ void result_cpu(float* a, float* b, float* result, int size)
 
 void Lab2_Task1()
 {
-    int N = 128 * 1024 * 1024;
+    int N = 1024;
 
     float memAllocTime = 0.0f;
     float memFillTime = 0.0f;
@@ -102,7 +112,7 @@ void Lab2_Task1()
 
     printf("...Running GPU kernel\n");
 
-    int blockSize = 16;
+    int blockSize = 128;
 
     // warmup kernel, see: https://stackoverflow.com/questions/57709333/cuda-kernel-runs-faster-the-second-time-it-is-run-why
     TimeEventGPU([&]()
