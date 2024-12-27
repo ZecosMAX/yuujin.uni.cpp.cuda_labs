@@ -19,7 +19,7 @@ void fillRandomRealVector(float* vector, int size)
     }
 }
 
-bool verify_vectors(float* a, float* b, int size, int* fail_index)
+bool verify_vectors(float* a, float* b, int size, int* fail_index, float eps)
 {
     if (a == nullptr || b == nullptr)
     {
@@ -32,7 +32,7 @@ bool verify_vectors(float* a, float* b, int size, int* fail_index)
 
     for (int i = 0; i < size; i++)
     {
-        if (a[i] != b[i])
+        if (abs(a[i] - b[i]) > eps)
         {
             *fail_index = i;
             return false;

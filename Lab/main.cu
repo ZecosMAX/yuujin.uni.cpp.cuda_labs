@@ -15,7 +15,10 @@ int main(int argc, char* argv[])
 
 void RunAllTasks()
 {
-    Lab2_Task1();
-    Lab2_Task2();
-    Lab2_Task3();
+    //Lab2_Task1();
+    //Lab2_Task2();
+    //Lab2_Task3();
+
+    Lab3_Task1();
+    Lab3_Task2();
 }

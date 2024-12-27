@@ -84,6 +84,10 @@
   <ItemGroup>
     <CudaCompile Include="common.cu" />
     <CudaCompile Include="lab2_task1.cu" />
+    <CudaCompile Include="lab2_task2.cu" />
+    <CudaCompile Include="lab2_task3.cu" />
+    <CudaCompile Include="lab3_task1.cu" />
+    <CudaCompile Include="lab3_task2.cu" />
     <CudaCompile Include="main.cu" />
   </ItemGroup>
   <ItemGroup>
