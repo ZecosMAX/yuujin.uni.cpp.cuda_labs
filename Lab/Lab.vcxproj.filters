@@ -62,6 +62,9 @@
     <CudaCompile Include="lab4_task1.cu">
       <Filter>Cuda Source Files</Filter>
     </CudaCompile>
+    <CudaCompile Include="lab4_task2.cu">
+      <Filter>Cuda Source Files</Filter>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector_utils.hpp">

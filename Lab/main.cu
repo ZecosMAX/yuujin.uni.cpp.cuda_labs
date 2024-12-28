@@ -24,4 +24,5 @@ void RunAllTasks()
     Lab3_Task2();
 
     Lab4_Task1();
+    Lab4_Task2();
 }

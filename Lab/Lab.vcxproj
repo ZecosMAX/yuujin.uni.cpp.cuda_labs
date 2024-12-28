@@ -92,6 +92,7 @@
     <CudaCompile Include="lab3_task1.cu" />
     <CudaCompile Include="lab3_task2.cu" />
     <CudaCompile Include="lab4_task1.cu" />
+    <CudaCompile Include="lab4_task2.cu" />
     <CudaCompile Include="main.cu" />
   </ItemGroup>
   <ItemGroup>
