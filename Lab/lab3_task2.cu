@@ -167,7 +167,7 @@ void Lab3_Task2()
 {
     printf("===============LAB 3 TASK 2===============\n");
 
-    int N = 256 * 1024 * 1024; // data size
+    int N = 1 * 1024 * 1024; // data size
     int bins = 96; 
 
     float mean = 23.5;

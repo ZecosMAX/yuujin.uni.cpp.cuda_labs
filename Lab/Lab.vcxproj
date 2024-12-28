@@ -79,6 +79,9 @@
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <CodeGeneration>compute_52,sm_52</CodeGeneration>
+      <AdditionalCompilerOptions>
+      </AdditionalCompilerOptions>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -88,9 +91,12 @@
     <CudaCompile Include="lab2_task3.cu" />
     <CudaCompile Include="lab3_task1.cu" />
     <CudaCompile Include="lab3_task2.cu" />
+    <CudaCompile Include="lab4_task1.cu" />
     <CudaCompile Include="main.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bitmap.cpp" />
+    <ClCompile Include="save_bitmap.cpp" />
     <ClCompile Include="vector_utils.cpp" />
     <ClCompile Include="windows_utils.cpp" />
     <ClCompile Include="zluda_utils.cpp" />
@@ -98,9 +104,17 @@
   <ItemGroup>
     <ClInclude Include="common.cuh" />
     <ClInclude Include="labs_tasks.cuh" />
+    <ClInclude Include="bitmap.hpp" />
+    <ClInclude Include="save_bitmap.hpp" />
+    <ClInclude Include="types.hpp" />
     <ClInclude Include="vector_utils.hpp" />
     <ClInclude Include="windows_utils.hpp" />
     <ClInclude Include="zluda_utils.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Lenna.bmp">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

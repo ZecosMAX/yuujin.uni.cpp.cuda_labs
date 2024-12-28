@@ -30,6 +30,12 @@
     <ClCompile Include="zluda_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="save_bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="main.cu">
@@ -53,6 +59,9 @@
     <CudaCompile Include="lab3_task2.cu">
       <Filter>Cuda Source Files</Filter>
     </CudaCompile>
+    <CudaCompile Include="lab4_task1.cu">
+      <Filter>Cuda Source Files</Filter>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector_utils.hpp">
@@ -70,5 +79,17 @@
     <ClInclude Include="labs_tasks.cuh">
       <Filter>Cuda Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bitmap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="save_bitmap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Lenna.bmp" />
   </ItemGroup>
 </Project>

@@ -35,12 +35,12 @@ bool Initialize(bool isZludaRuntime, int argc, char* argv[])
             printf("Device %d\n", device);
             printf("Compute capability      : %d.%d\n", devProp.major, devProp.minor);
             printf("Name                    : %s\n", devProp.name);
-            printf("Total Global Memory     : %u (MiB)\n", devProp.totalGlobalMem / (1024 * 1024));
-            printf("Shared memory per block : %d (kiB)\n", devProp.sharedMemPerBlock / (1024));
+            printf("Total Global Memory     : %i (MiB)\n", (int)(devProp.totalGlobalMem / (1024 * 1024)));
+            printf("Shared memory per block : %i (kiB)\n", (int)(devProp.sharedMemPerBlock / (1024)));
             printf("Registers per block     : %d\n", devProp.regsPerBlock);
             printf("Warp size               : %d\n", devProp.warpSize);
             printf("Max threads per block   : %d\n", devProp.maxThreadsPerBlock);
-            printf("Total constant memory   : %d\n", devProp.totalConstMem);
+            printf("Total constant memory   : %i (kiB)\n", (int)(devProp.totalConstMem / 1024));
             printf("=========================================\n\n");
         }
     }
@@ -97,4 +97,52 @@ double TimeEventGPU(std::function<void()> wrapper)
     cudaEventDestroy(stop);
 
     return (double)Time;
+}
+
+bool LoadPGMImage(const char* path, PGM_Image* out_image) 
+{
+    return false;
+}
+
+bool LoadBMPImage(const char* path, RGBA_Image* out_image)
+{
+    // load the file. The constructor now does most of the work
+    printf("LoadBMPImage :: creating bmp object...\n");
+    BitMap example_bmp(path);
+
+    printf("LoadBMPImage :: converting to raw image...\n");
+    RGBA_Image image = example_bmp.ConvertToRawImage();
+
+    printf("LoadBMPImage :: setting output pointer...\n");
+    *out_image = image;
+
+    //printf("LoadBMPImage :: cleaning up containter...\n");
+    //example_bmp.~BitMap();
+
+    return true;
+}
+
+bool SaveBMPImage(const char* path, RGBA_Image* image, bool rewrite)
+{
+    std::vector<uint8_t> image_vector(image->width * image->height * 3);
+    auto channel{ image_vector.data() };
+
+    for (int y = 0; y < image->height; y++)
+    {
+        for (int x = 0; x < image->width; x++)
+        {
+            auto r = image->data[y * image->width + x].x;
+            auto g = image->data[y * image->width + x].y;
+            auto b = image->data[y * image->width + x].z;
+
+            *channel++ = static_cast<uint8_t>(r);
+            *channel++ = static_cast<uint8_t>(g);
+            *channel++ = static_cast<uint8_t>(b);
+
+            //printf("COLOR: (%i, %i, %i) @ x = %i; y = %i;\n", r, g, b, x, y);
+        }
+    }
+
+    save_bmp(path, image->width, image->height, image_vector.data());
+    return true;
 }
